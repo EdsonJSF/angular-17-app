@@ -1,1 +1,14 @@
-<p>defer-options works!</p>
+<app-title title="Defer Options" />
+
+<section>
+  <h1 class="text-xl">Interaction</h1>
+  <hr class="my-2" />
+
+  @defer (on interaction) {
+  <app-heavy-loaders-fast cssClass="h-20 bg-blue-500">
+    <span>On Interaction</span>
+  </app-heavy-loaders-fast>
+  } @placeholder {
+  <div class="w-full h-20 bg-purple-100">Click me</div>
+  }
+</section>
