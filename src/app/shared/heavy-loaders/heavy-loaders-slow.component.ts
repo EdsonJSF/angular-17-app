@@ -6,4 +6,4 @@ import { Component } from '@angular/core';
   imports: [],
   template: ` <h1>heavy-loaders-slow works</h1> `,
 })
-export class HeavyLoadersComponent {}
+export class HeavyLoadersSlowComponent {}
