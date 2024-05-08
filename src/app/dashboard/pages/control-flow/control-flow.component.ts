@@ -2,12 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
+import { TitleComponent } from '@share/title/title.component';
+
 type Grade = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | '';
 
 @Component({
   selector: 'app-control-flow',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, TitleComponent],
   templateUrl: './control-flow.component.html',
   styles: ``,
 })
