@@ -12,3 +12,58 @@
   <div class="w-full h-20 bg-purple-100">Click me</div>
   }
 </section>
+
+<section>
+  <hr class="my-2" />
+
+  <button
+    #btnInteraction
+    class="my-2 p-2 bg-blue-500 text-white rounded transition-all hover:bg-blue-700"
+  >
+    Click me!
+  </button>
+
+  @defer (on interaction(btnInteraction)) {
+  <app-heavy-loaders-fast cssClass="h-20 bg-blue-500">
+    <span>On Interaction button</span>
+  </app-heavy-loaders-fast>
+  } @placeholder {
+  <div class="w-full h-20 bg-purple-100">Click button</div>
+  }
+</section>
+
+<section>
+  <hr class="my-2" />
+
+  @defer (on hover) {
+  <app-heavy-loaders-fast cssClass="h-20 bg-blue-500">
+    <span>On Hover</span>
+  </app-heavy-loaders-fast>
+  } @placeholder {
+  <div class="w-full h-20 bg-purple-100">Hover me</div>
+  }
+</section>
+
+<section>
+  <hr class="my-2" />
+
+  @defer (on immediate) {
+  <app-heavy-loaders-fast cssClass="h-20 bg-blue-500">
+    <span>On Immediate</span>
+  </app-heavy-loaders-fast>
+  } @placeholder {
+  <div class="w-full h-20 bg-purple-100">Immediate</div>
+  }
+</section>
+
+<section>
+  <hr class="my-2" />
+
+  @defer (on hover; prefetch on idle) {
+  <app-heavy-loaders-fast cssClass="h-20 bg-blue-500">
+    <span>On Hover, idle</span>
+  </app-heavy-loaders-fast>
+  } @placeholder {
+  <div class="w-full h-20 bg-purple-100">Hover me</div>
+  }
+</section>
