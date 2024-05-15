@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
+import { delay, map, Observable } from 'rxjs';
 
 import { environment } from '@environments';
-import { UserResponse, UserState } from '@interfaces';
-import { delay } from 'rxjs';
+import { User, UserResponse, UsersResponse, UserState } from '@interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +21,7 @@ export class UsersService {
 
   constructor() {
     this.#http
-      .get<UserResponse>(`${environment.baseURL}/users`)
+      .get<UsersResponse>(`${environment.baseURL}/users`)
       .pipe(delay(2000))
       .subscribe({
         next: (res) => {
@@ -34,5 +34,14 @@ export class UsersService {
           this.#state.update((value) => ({ ...value, loading: false }));
         },
       });
+  }
+
+  getUSerById(id: string): Observable<User> {
+    return this.#http
+      .get<UserResponse>(`${environment.baseURL}/users/${id}`)
+      .pipe(
+        delay(2000),
+        map((res) => res.data)
+      );
   }
 }

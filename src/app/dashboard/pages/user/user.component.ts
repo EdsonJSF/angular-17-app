@@ -1,11 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs';
+
+import { TitleComponent } from '@share/title/title.component';
+import { UsersService } from '@services/users.service';
 
 @Component({
-
-  selector: "app-user",
+  selector: 'app-user',
   standalone: true,
-  imports: [],
-  templateUrl: './user.component.html',
+  imports: [TitleComponent],
+  template: `
+    <app-title title="user" />
+
+    @if (user()) {
+    <section>
+      <img [srcset]="user()!.avatar" [alt]="user()!.first_name" />
+
+      <h3>{{ user()!.first_name }} {{ user()!.last_name }}</h3>
+      <p>{{ user()?.email }}</p>
+    </section>
+    } @else {
+    <h3>loading users</h3>
+    }
+  `,
   styles: ``,
 })
-export class UserComponent {}
+export class UserComponent {
+  #route = inject(ActivatedRoute);
+  #userService = inject(UsersService);
+
+  public user = toSignal(
+    this.#route.params.pipe(
+      switchMap(({ id }) => this.#userService.getUSerById(id))
+    )
+  );
+
+  constructor() {}
+}
