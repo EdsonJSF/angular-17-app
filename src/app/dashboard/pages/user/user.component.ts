@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
@@ -11,7 +11,7 @@ import { UsersService } from '@services/users.service';
   standalone: true,
   imports: [TitleComponent],
   template: `
-    <app-title title="user" />
+    <app-title [title]="title()" />
 
     @if (user()) {
     <section>
@@ -35,6 +35,14 @@ export class UserComponent {
       switchMap(({ id }) => this.#userService.getUSerById(id))
     )
   );
+
+  public title = computed(() => {
+    let title = 'User Info:';
+    if (this.user()) {
+      title += ` ${this.user()?.first_name}`;
+    }
+    return title;
+  });
 
   constructor() {}
 }
