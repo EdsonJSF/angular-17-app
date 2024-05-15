@@ -1,1 +1,20 @@
-<p>users works!</p>
+<app-title title="User List" />
+
+<ul>
+  @for (user of users(); track user.id) {
+  <li class="flex items-center my-2">
+    <img
+      class="w-14"
+      [alt]="user.first_name + ' profile'"
+      [srcset]="user.avatar"
+    />
+    <a class="mx-5 hover:underline" [routerLink]="['/dashboard/user', user.id]">
+      {{ user.first_name }} {{ user.last_name }}
+    </a>
+  </li>
+  } @empty {
+  <h2>Users is empty</h2>
+  @if (loading()) {
+  <h3>Loading ...</h3>
+  } }
+</ul>
