@@ -51,13 +51,22 @@ export const routes: Routes = [
           import('./pages/users/users.component').then((m) => m.UsersComponent),
       },
       {
-        path: 'view-transition',
-        title: 'View Transition',
+        path: 'view-transition-1',
+        title: 'View Transition 1',
         loadComponent: () =>
-          import('./pages/view-transition/view-transition.component').then(
+          import('./pages/view-transition/view-transition-1.component').then(
             (m) => m.ViewTransitionComponent
           ),
       },
+      {
+        path: 'view-transition-2',
+        title: 'View Transition 2',
+        loadComponent: () =>
+          import('./pages/view-transition/view-transition-2.component').then(
+            (m) => m.ViewTransitionComponent
+          ),
+      },
+
       { path: '**', redirectTo: 'control-flow' },
     ],
   },
